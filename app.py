@@ -2,6 +2,7 @@
 from flask import Flask
 from WashingMachine import WashingMachine
 from Pygasto import *
+from datetime import date
 import requests
 import os
 import random
@@ -19,7 +20,20 @@ app = Flask(__name__)
 # and add decorators to define the appropriate resource locators for them.
 # D:\Repos\Python\HelloPython\names.json
 
+#Mis Gastos
+
+#    def __init__(self, p_gastodesc, p_gastocomercio, p_gastodate, p_gastomonto,p_gastomisc,p_gastomisc2):
+
+today = date.today()
+d1 = today.strftime("%d/%m/%Y")
+
+migasto = Pygasto("Alimento Para Perro","Mall Pet",d1,5000,"NA","NA")
+
 miLavadora = WashingMachine("Samsung","XT5600","SNHT34",100)
+
+print('-----------------------------------------------------')
+
+print(migasto.DisplayStr())
 
 miLavadora.DisplayData()
 
@@ -31,7 +45,10 @@ url = 'https://www.sucursalelectronica.com/redir/redirect.go?country=CR'
 names = json.loads(open('names.json').read())
 
 #for name in names:
-for x in range (8):
+
+
+print('-----------------------------------------------------')
+for x in range (2):
     for name in names:
         name_extra = ''.join(random.choice(string.digits))
 
@@ -44,7 +61,7 @@ for x in range (8):
         'pass': password
         })
     
-
+print('-----------------------------------------------------')
 
 @app.route('/')
 @app.route('/hello')
@@ -53,8 +70,13 @@ for x in range (8):
 
 def hello():
     # Render the page
-    hie = "<br><b>Geography > Region > Availability Zone > Availability Set > Fault Domain ./ Update domain</b><br>"
-    return hie
+    hie1 = '<hr width="500px;" color="red" size="10">'
+    hie2 =  "Test: <br>" + str(migasto.DisplayStr())
+    hi3 = '<br>'
+    hie =  "<br><b>Geography > Region > Availability Zone > Availability Set > Fault Domain ./ Update domain</b><br>"
+    
+   
+    return hie1+hie + hie1 +hie2 +hie1
     #return emails
 
 def hierachy():

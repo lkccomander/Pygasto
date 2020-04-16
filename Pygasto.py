@@ -48,6 +48,17 @@ class Pygasto:
         print("Misc 2:",self.gastomisc2)
 
 
+    def DisplayStr(self):
+        infogasto = str("\nGasto Id: " + self.gastodesc+"<br>")
+        infogasto += str("\nDescripcion de Gasto: " +self.gastodesc)
+        infogasto += str("\nComercio: " +self.gastocomercio +"<br>")
+        infogasto += str("\nFecha del Gasto: "+self.gastodate+"<br>")
+        infogasto += str("\nMonto del Gasto:"+str(self.gastomonto)+"<br>")
+        infogasto += str("\nMisc 1:"+self.gastomisc+"<br>")
+        infogasto += str("\nMisc 2:"+self.gastomisc2+"<br>")
+        return infogasto
+
+
 
 
 
