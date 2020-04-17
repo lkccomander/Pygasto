@@ -3,6 +3,7 @@ from flask import Flask
 from WashingMachine import WashingMachine
 from Pygasto import *
 from datetime import date
+import pyodbc
 import requests
 import os
 import random
@@ -61,7 +62,14 @@ for x in range (2):
         'pass': password
         })
     
-print('-----------------------------------------------------')
+print('----------------------SQL-------------------------------')
+
+conn = pyodbc.connect('Driver={SQL Server};Server=DUKE;Database=pyGasto;Trusted_Connection=yes;uid=pyGasto;password=pwdGasto')
+cursor = conn.cursor()
+cursor.execute('SELECT * FROM Pygasto.dbo.t_gastospy')
+for row in cursor:
+ print(row)
+
 
 @app.route('/')
 @app.route('/hello')
@@ -70,13 +78,18 @@ print('-----------------------------------------------------')
 
 def hello():
     # Render the page
+
     hie1 = '<hr width="500px;" color="red" size="10">'
     hie2 =  "Test: <br>" + str(migasto.DisplayStr())
     hi3 = '<br>'
     hie =  "<br><b>Geography > Region > Availability Zone > Availability Set > Fault Domain ./ Update domain</b><br>"
-    
-   
-    return hie1+hie + hie1 +hie2 +hie1
+    conn1 = pyodbc.connect('Driver={SQL Server};Server=DUKE;Database=pyGasto;Trusted_Connection=yes;uid=pyGasto;password=pwdGasto')
+    cursor = conn1.cursor()
+    cursor.execute('SELECT * FROM Pygasto.dbo.t_gastospy')
+    for row in cursor:
+                hie4 = " ".join(map(str, row))
+
+    return hie1+hie + hie1 +hie2 +hie1 +hie4
     #return emails
 
 def hierachy():
